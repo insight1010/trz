@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ТРИЗ Платформа - Бизнес Возможности</title>
+    <title>InsightFlow - Бизнес-возможности</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
-            --tg-theme-bg-color: var(--light-bg);
-            --tg-theme-button-color: var(--secondary-color);
+            --tg-theme-bg-color: #FFFFFF;
+            --tg-theme-button-color: #0A2647;
             --tg-theme-button-text-color: #ffffff;
-            --primary-color: #2D3047;
-            --secondary-color: #419D78;
-            --accent-color: #E0A458;
-            --light-bg: #F7F7F7;
+            --primary-color: #0A2647;
+            --secondary-color: #144272;
+            --accent-color: #2C74B3;
+            --success-color: #3CCF4E;
+            --warning-color: #FFA41B;
         }
         
         body {
@@ -26,81 +28,99 @@
 
         .navbar {
             background-color: var(--tg-theme-bg-color);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
 
-        .navbar-brand, .nav-link {
-            color: var(--primary-color) !important;
-        }
-
-        .problem-card {
-            border-radius: 12px;
-            transition: transform 0.2s;
-            background: white;
+        .insight-card {
             border: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            margin-bottom: 16px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            background: white;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
         }
 
-        .problem-card:active {
+        .insight-card:active {
             transform: scale(0.98);
         }
 
-        .btn {
-            border-radius: 8px;
-            padding: 8px 16px;
-        }
-
-        .btn-primary {
-            background-color: var(--tg-theme-button-color);
-            border: none;
-            color: var(--tg-theme-button-text-color);
-        }
-
-        .btn-outline-primary {
-            color: var(--tg-theme-button-color);
-            border-color: var(--tg-theme-button-color);
-        }
-
-        .badge {
+        .category-badge {
+            font-size: 12px;
             padding: 6px 12px;
-            border-radius: 6px;
+            border-radius: 20px;
             font-weight: 500;
         }
 
-        .badge-brainstorm {
-            background-color: #FF9F1C;
-            color: white;
+        .category-operational { background: #E3F2FD; color: #1565C0; }
+        .category-strategic { background: #F3E5F5; color: #7B1FA2; }
+        .category-hr { background: #E8F5E9; color: #2E7D32; }
+        .category-market { background: #FFF3E0; color: #EF6C00; }
+
+        .status-badge {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.05);
         }
 
-        .badge-ikr {
-            background-color: #2EC4B6;
-            color: white;
+        .insight-stats {
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+            color: #666;
         }
 
-        .progress-indicator {
-            height: 6px;
-            border-radius: 3px;
-            background-color: #E9ECEF;
+        .insight-stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        .modal {
-            margin-top: 20px;
+        .btn {
+            border-radius: 12px;
+            padding: 8px 16px;
+            font-weight: 500;
         }
 
-        .modal-content {
-            border-radius: 16px;
+        .btn-primary {
+            background: var(--tg-theme-button-color);
+            border: none;
         }
 
-        .filter-scroll {
+        .btn-outline {
+            border: 1px solid rgba(0,0,0,0.1);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: rgba(0,0,0,0.02);
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 8px;
             overflow-x: auto;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
             padding: 8px 0;
+            scrollbar-width: none;
         }
 
-        .filter-scroll::-webkit-scrollbar {
+        .filter-chips::-webkit-scrollbar {
             display: none;
+        }
+
+        .chip {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: white;
+            border: 1px solid rgba(0,0,0,0.1);
+            white-space: nowrap;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .chip.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
         }
 
         .bottom-nav {
@@ -109,144 +129,742 @@
             left: 0;
             right: 0;
             background: white;
-            padding: 12px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            padding: 12px 20px;
+            box-shadow: 0 -1px 0 rgba(0,0,0,0.1);
             z-index: 1000;
         }
 
-        .badge-level-1 {
-            background-color: #FF9F1C;
-            color: white;
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
         }
 
-        .badge-level-2 {
-            background-color: #2EC4B6;
-            color: white;
+        .nav-link i {
+            font-size: 20px;
         }
 
-        .user-level {
-            display: inline-flex;
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+        }
+
+        .modal-header {
+            border-bottom: none;
+            padding: 20px 24px 0;
+        }
+
+        .modal-body {
+            padding: 20px 24px;
+        }
+
+        .modal-footer {
+            border-top: none;
+            padding: 0 24px 20px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.1);
+            padding: 12px 16px;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: var(--accent-color);
+        }
+
+        .insight-detail {
+            background: rgba(0,0,0,0.02);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .solution-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .solution-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .author-info {
+            display: flex;
             align-items: center;
             gap: 8px;
-            padding: 4px 12px;
-            background: rgba(0,0,0,0.05);
-            border-radius: 20px;
         }
 
-        .level-icon {
+        .author-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .level-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--accent-color);
+            color: white;
             width: 24px;
             height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--secondary-color);
-            color: white;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 500;
+            border: 2px solid white;
         }
 
-        .category-tag {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 16px;
-            font-size: 12px;
-            margin-right: 8px;
-            margin-bottom: 8px;
+        .stat-badge {
+            background: rgba(0,0,0,0.05);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .level-progress .progress {
+            height: 8px;
+            border-radius: 4px;
             background: rgba(0,0,0,0.05);
         }
 
-        .category-social { background: #FFE0E0; }
-        .category-economic { background: #E0FFE0; }
-        .category-local { background: #E0E0FF; }
-        .category-personal { background: #FFE0FF; }
+        .level-progress .progress-bar {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
 
-        .moderator-controls {
+        .section-block {
             background: rgba(0,0,0,0.02);
-            border-radius: 8px;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .section-title {
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .achievement-item {
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .achievement-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin: 0 auto 8px;
+        }
+
+        .achievement-icon.locked {
+            background: rgba(0,0,0,0.1);
+            color: rgba(0,0,0,0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .friends-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .friend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             padding: 12px;
-            margin-top: 16px;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .friend-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .friend-info {
+            flex: 1;
+        }
+
+        .friend-name {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .friend-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .level-indicator {
+            background: rgba(0,0,0,0.05);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .friend-achievements {
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
     </style>
 </head>
 <body>
     <!-- Навигация -->
-    <nav class="navbar navbar-light mb-3">
+    <nav class="navbar sticky-top">
         <div class="container">
-            <span class="navbar-brand">ТРИЗ Платформа</span>
+            <span class="navbar-brand fw-bold">InsightFlow</span>
+            <button class="btn btn-outline" onclick="showProfile()">
+                <i class="bi bi-person"></i>
+            </button>
         </div>
     </nav>
 
     <!-- Основной контент -->
-    <div class="container">
+    <div class="container mb-5">
         <!-- Фильтры -->
-        <div class="filter-scroll mb-3">
-            <div class="d-flex gap-2">
-                <button class="btn btn-outline-primary active">Все задачи</button>
-                <button class="btn btn-outline-primary">Конфликты</button>
-                <button class="btn btn-outline-primary">Идеал</button>
-                <button class="btn btn-outline-primary">Решённые</button>
-            </div>
+        <div class="filter-chips mb-4">
+            <div class="chip active">Все инсайты</div>
+            <div class="chip">Операционные</div>
+            <div class="chip">Стратегические</div>
+            <div class="chip">HR</div>
+            <div class="chip">Рыночные</div>
+            <div class="chip">Мои кейсы</div>
         </div>
 
-        <!-- Лента проблем -->
-        <div class="row g-3">
-            <!-- Пример карточки уровня 1 -->
-            <div class="col-12">
-                <div class="card problem-card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <div>
-                                <h5 class="card-title">Недостаточная мотивация сотрудников</h5>
-                                <div class="mb-2">
-                                    <span class="category-tag category-local">Локальная проблема</span>
-                                </div>
+        <!-- Лента инсайтов -->
+        <div class="insight-feed">
+            <!-- Кейс 1: Эпическое значение -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-strategic mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Рутинные задачи как квесты</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    15 инсайтов
+                                </span>
                             </div>
-                            <span class="badge badge-level-1">Уровень 1</span>
                         </div>
-                        <p class="card-text">Сотрудники не проявляют инициативу и работают без энтузиазма</p>
-                        <div class="mb-3">
-                            <small class="text-muted">Собранные факты:</small>
-                            <ul class="small text-muted mb-0">
-                                <li>50% сотрудников опаздывают</li>
-                                <li>Низкая активность на собраниях</li>
-                                <li>Отсутствие новых идей</li>
-                            </ul>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Низкая мотивация сотрудников при выполнении рутинных задач</p>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <small class="text-muted">Участников: 5</small>
-                                <small class="text-muted ms-2">Предложений: 3</small>
-                            </div>
-                            <button class="btn btn-primary btn-sm">Предложить конфликт</button>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Создать систему "эпических квестов", где каждая рутинная задача становится частью большой миссии</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Пример карточки уровня 2 -->
-            <div class="col-12">
-                <div class="card problem-card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <div>
-                                <h5 class="card-title">Автоматизация vs Персонализация</h5>
-                                <div class="mb-2">
-                                    <span class="category-tag category-economic">Экономическая проблема</span>
-                                </div>
+            <!-- Кейс 2: Социальное влияние -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-hr mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Конкуренция как драйвер развития</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    12 инсайтов
+                                </span>
                             </div>
-                            <span class="badge badge-level-2">Уровень 2</span>
                         </div>
-                        <p class="card-text">Конфликт между автоматизацией процессов и сохранением персонального подхода</p>
-                        <div class="progress progress-indicator mb-3">
-                            <div class="progress-bar bg-success" style="width: 60%"></div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Отсутствие здоровой конкуренции между отделами</p>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <small class="text-muted">Участников: 12</small>
-                                <small class="text-muted ms-2">Решений: 8</small>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Внедрить систему межотдельных челленджей с публичными лидербордами и командными достижениями</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кейс 3: Дефицит и нетерпение -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-market mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Ограниченные предложения как триггер</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    18 инсайтов
+                                </span>
                             </div>
-                            <button class="btn btn-primary btn-sm">Предложить ИКР</button>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Низкая конверсия при запуске новых продуктов</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Создать систему "ранних пташек" с эксклюзивным доступом и ограниченными предложениями</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кейс 4: Владение и обладание -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-operational mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Персонализация как мотивация</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    14 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Низкая вовлечённость в корпоративную культуру</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Внедрить систему персонализации рабочего пространства с возможностью "прокачки" своего места</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кейс 5: Непредсказуемость -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-strategic mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Случайные награды как мотиватор</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    16 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Предсказуемость системы мотивации</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Внедрить систему "счастливых часов" с случайными бонусами за выполнение обычных задач</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кейс 6: Жалобы как источник инноваций -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-strategic mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Недовольные клиенты как источник продуктовых идей</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    12 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Постоянный поток жалоб от клиентов на отсутствие определённых функций</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Создать систему, где жалобы автоматически становятся бэклогом новых фич</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кейс 7: Текучка как инновация -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-hr mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Текучка как источник новых связей</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    8 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Высокая текучка кадров в компании</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Создать alumni-программу, превращающую бывших сотрудников в амбассадоров и партнёров</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кейс 8: Конкуренты как ресурс -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-market mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Конкуренты как источник клиентов</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    15 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Сильные конкуренты забирают клиентов</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Создать платформу, где конкуренты становятся партнёрами в обслуживании клиентов</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кейс 9: Ошибки как обучение -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-operational mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Ошибки как источник знаний</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    9 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Частые ошибки новых сотрудников в проектах</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Создать базу знаний, где каждая ошибка автоматически становится обучающим кейсом</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кейс 10: Задержки как преимущество -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-operational mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Задержки как источник лояльности</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    11 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Задержки в доставке заказов</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Превратить время ожидания в развлекательный квест с бонусами</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кейс 11: Отказы как возможность -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-market mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Отказы как источник новых продуктов</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    7 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Высокий процент отказов на этапе оформления заказа</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Создать новую линейку продуктов на основе причин отказа</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кейс 12: Сезонность как драйвер -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-strategic mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Сезонность как источник инноваций</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    13 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Сильные сезонные колебания спроса</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Создать анти-сезонные продукты, использующие простаивающие ресурсы</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кейс 13: Возвраты как развитие -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-operational mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Возвраты как источник улучшений</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    10 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Высокий процент возвратов товара</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Создать marketplace возвращённых товаров с уникальными историями</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кейс 14: Опоздания как инновация -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-hr mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Опоздания как источник гибкости</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    6 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Частые опоздания сотрудников на работу</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Внедрить систему плавающего графика, где опоздания становятся частью рабочего процесса</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кейс 15: Конфликты как развитие -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-hr mb-2">Инсайт</span>
+                            <h5 class="card-title mb-1">Конфликты как источник роста</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    14 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Постоянные конфликты между отделами</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Создать систему кросс-функциональных проектов, где конфликты становятся источником новых идей</p>
                         </div>
                     </div>
                 </div>
@@ -256,150 +874,263 @@
 
     <!-- Нижняя навигация -->
     <div class="bottom-nav">
-        <div class="d-flex justify-content-around">
-            <button class="btn btn-link text-decoration-none" onclick="showFeed()">
-                <i class="bi bi-house-fill"></i>
-                <div>Лента</div>
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="#" class="nav-link" data-nav="insights">
+                <i class="bi bi-house"></i>
+                <span>Инсайты</span>
+            </a>
+            <a href="#" class="nav-link" data-nav="search">
+                <i class="bi bi-search"></i>
+                <span>Поиск</span>
+            </a>
+            <button class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#newCaseModal">
+                <i class="bi bi-plus-lg"></i>
             </button>
-            <button class="btn btn-link text-decoration-none" onclick="showMyTasks()">
-                <i class="bi bi-list-task"></i>
-                <div>Мои задачи</div>
-            </button>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newProblemModal">
-                + Новая задача
-            </button>
+            <a href="#" class="nav-link" data-nav="saved">
+                <i class="bi bi-bookmark"></i>
+                <span>Сохранённые</span>
+            </a>
+            <a href="#" class="nav-link" data-nav="profile" onclick="showProfile()">
+                <i class="bi bi-person"></i>
+                <span>Профиль</span>
+            </a>
         </div>
     </div>
 
-    <!-- Модальное окно добавления проблемы -->
-    <div class="modal fade" id="newProblemModal" tabindex="-1">
+    <!-- Модальное окно нового кейса -->
+    <div class="modal fade" id="newCaseModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Новая задача</h5>
+                    <h5 class="modal-title">Новый бизнес-кейс</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="mb-3">
-                            <label class="form-label">Уровень задачи</label>
-                            <select class="form-select" id="problemLevel">
-                                <option value="1">Уровень 1: Регистрация раздражителя</option>
-                                <option value="2">Уровень 2: Конфликтующая пара</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3" id="categorySelect">
-                            <label class="form-label">Категория раздражителя</label>
+                        <div class="mb-4">
+                            <label class="form-label">Категория</label>
                             <select class="form-select">
-                                <option value="social">Социальное недовольство</option>
-                                <option value="economic">Экономическая ситуация</option>
-                                <option value="local">Локальные проблемы</option>
-                                <option value="personal">Персональные проблемы</option>
+                                <option value="operational">Операционный кейс</option>
+                                <option value="strategic">Стратегический кейс</option>
+                                <option value="hr">HR кейс</option>
+                                <option value="market">Рыночный кейс</option>
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Название</label>
-                            <input type="text" class="form-control" placeholder="Кратко опишите ситуацию">
+                        <div class="mb-4">
+                            <label class="form-label">Краткое описание проблемы</label>
+                            <input type="text" class="form-control" placeholder="В чём суть проблемы?">
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Описание ситуации</label>
-                            <textarea class="form-control" rows="3" placeholder="Опишите контекст и детали"></textarea>
+                        <div class="mb-4">
+                            <label class="form-label">Ключевые метрики</label>
+                            <textarea class="form-control" rows="2" placeholder="Какие показатели характеризуют проблему?"></textarea>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Факты</label>
-                            <textarea class="form-control" rows="3" placeholder="Перечислите конкретные факты, наблюдения, данные"></textarea>
-                        </div>
-
-                        <div class="mb-3 d-none" id="conflictPairForm">
-                            <h6 class="mb-3">Конфликтующая пара</h6>
-                            <div class="mb-3">
-                                <label class="form-label">Элемент 1</label>
-                                <input type="text" class="form-control" placeholder="Первый элемент конфликта">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Элемент 2</label>
-                                <input type="text" class="form-control" placeholder="Второй элемент конфликта">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Идеальный конечный результат (ИКР)</label>
-                                <textarea class="form-control" rows="2" placeholder="Опишите желаемый результат"></textarea>
-                            </div>
+                        <div class="mb-4">
+                            <label class="form-label">Желаемый результат</label>
+                            <textarea class="form-control" rows="2" placeholder="Какой результат хотите получить?"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-outline" data-bs-dismiss="modal">Отмена</button>
                     <button type="button" class="btn btn-primary">Опубликовать</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Профиль пользователя -->
-    <div class="modal fade" id="userProfileModal" tabindex="-1">
-        <div class="modal-dialog">
+    <!-- Модальное окно деталей инсайта -->
+    <div class="modal fade" id="insightDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Профиль</h5>
+                    <h5 class="modal-title">Детали кейса</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
+                    <span class="category-badge category-operational mb-3">Операционный кейс</span>
+                    <h5 class="mb-4">Высокая текучка линейного персонала</h5>
+
+                    <div class="insight-detail mb-4">
+                        <h6 class="mb-3">Описание проблемы</h6>
+                        <p>Ежемесячная текучка 30% среди линейного персонала создаёт серьёзные операционные проблемы:</p>
+                        <ul class="mb-0">
+                            <li>Затраты на подбор: 50,000₽/мес</li>
+                            <li>Затраты на обучение: 30,000₽/мес</li>
+                            <li>Снижение качества работы</li>
+                            <li>Повышенная нагрузка на опытных сотрудников</li>
+                        </ul>
+                    </div>
+
+                    <div class="insight-detail mb-4">
+                        <h6 class="mb-3">Найденные возможности</h6>
+                        <div class="solution-card">
+                            <div class="solution-header">
+                                <div class="author-info">
+                                    <div class="author-avatar">АМ</div>
+                                    <div>
+                                        <div class="fw-500">Алексей Морозов</div>
+                                        <small class="text-muted">HR-директор • 2 часа назад</small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline btn-sm">
+                                    <i class="bi bi-hand-thumbs-up"></i>
+                                    12
+                                </button>
+                            </div>
+                            <p class="mb-0">Создать систему быстрого онбординга через мобильное приложение + геймификация обучения. Это снизит время адаптации на 40% и повысит вовлечённость.</p>
+                        </div>
+
+                        <div class="solution-card">
+                            <div class="solution-header">
+                                <div class="author-info">
+                                    <div class="author-avatar">ЕК</div>
+                                    <div>
+                                        <div class="fw-500">Екатерина Котова</div>
+                                        <small class="text-muted">Операционный директор • 3 часа назад</small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline btn-sm">
+                                    <i class="bi bi-hand-thumbs-up"></i>
+                                    8
+                                </button>
+                            </div>
+                            <p class="mb-0">Внедрить систему наставничества с бонусами за успешную адаптацию новичков. Опытные сотрудники будут мотивированы помогать новым.</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="mb-3">Предложить решение</h6>
+                        <textarea class="form-control mb-3" rows="3" placeholder="Опишите ваше решение..."></textarea>
+                        <button class="btn btn-primary w-100">Отправить решение</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно профиля -->
+    <div class="modal fade" id="profileModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body pt-0">
+                    <!-- Шапка профиля -->
                     <div class="text-center mb-4">
-                        <div class="level-icon mb-2">15</div>
-                        <h5>Решатель проблем</h5>
-                        <div class="progress mb-2" style="height: 8px;">
-                            <div class="progress-bar bg-success" style="width: 75%"></div>
+                        <div class="position-relative d-inline-block">
+                            <div class="profile-avatar mb-2">АМ</div>
+                            <span class="level-badge">12</span>
                         </div>
-                        <small class="text-muted">750/1000 XP до следующего уровня</small>
+                        <h5 class="mb-1">Алексей Морозов</h5>
+                        <p class="text-muted mb-2">Инноватор • HR-директор</p>
+                        <div class="d-flex justify-content-center gap-2 mb-3">
+                            <span class="stat-badge">
+                                <i class="bi bi-lightbulb-fill"></i>
+                                42 инсайта
+                            </span>
+                            <span class="stat-badge">
+                                <i class="bi bi-trophy-fill"></i>
+                                15 наград
+                            </span>
+                        </div>
+                        <div class="level-progress mb-4">
+                            <div class="progress mb-2">
+                                <div class="progress-bar" style="width: 75%"></div>
+                            </div>
+                            <small class="text-muted">750/1000 XP до 13 уровня</small>
+                        </div>
                     </div>
 
-                    <div class="row text-center mb-4">
-                        <div class="col">
-                            <h6>23</h6>
-                            <small class="text-muted">Решено проблем</small>
-                        </div>
-                        <div class="col">
-                            <h6>45</h6>
-                            <small class="text-muted">Предложено идей</small>
-                        </div>
-                        <div class="col">
-                            <h6>12</h6>
-                            <small class="text-muted">Активных задач</small>
+                    <!-- Награды -->
+                    <div class="section-block mb-4">
+                        <h6 class="section-title">Награды</h6>
+                        <div class="achievements-grid">
+                            <div class="achievement-item achieved">
+                                <div class="achievement-icon">
+                                    <i class="bi bi-stars"></i>
+                                </div>
+                                <span>Первый инсайт</span>
+                            </div>
+                            <div class="achievement-item achieved">
+                                <div class="achievement-icon">
+                                    <i class="bi bi-lightning-charge"></i>
+                                </div>
+                                <span>Быстрый старт</span>
+                            </div>
+                            <div class="achievement-item achieved">
+                                <div class="achievement-icon">
+                                    <i class="bi bi-trophy"></i>
+                                </div>
+                                <span>Топ-решение</span>
+                            </div>
+                            <div class="achievement-item">
+                                <div class="achievement-icon locked">
+                                    <i class="bi bi-people"></i>
+                                </div>
+                                <span>Командный игрок</span>
+                            </div>
                         </div>
                     </div>
 
-                    <h6 class="mb-3">Достижения</h6>
-                    <div class="d-flex flex-wrap gap-2 mb-4">
-                        <span class="badge bg-success">Мастер конфликтов</span>
-                        <span class="badge bg-info">Генератор идей</span>
-                        <span class="badge bg-warning">Командный игрок</span>
+                    <!-- Статистика -->
+                    <div class="section-block mb-4">
+                        <h6 class="section-title">Статистика</h6>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">42</div>
+                                <div class="stat-label">Инсайтов</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">156</div>
+                                <div class="stat-label">Лайков</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">23</div>
+                                <div class="stat-label">Кейса</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">8</div>
+                                <div class="stat-label">Десятка</div>
+                            </div>
+                        </div>
                     </div>
 
-                    <h6 class="mb-3">Статистика</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">
-                            <small>
-                                <span class="text-muted">Уровень 1 проблем решено:</span>
-                                15
-                            </small>
-                        </li>
-                        <li class="mb-2">
-                            <small>
-                                <span class="text-muted">Уровень 2 проблем решено:</span>
-                                8
-                            </small>
-                        </li>
-                        <li class="mb-2">
-                            <small>
-                                <span class="text-muted">Принято предложений:</span>
-                                34
-                            </small>
-                        </li>
-                    </ul>
+                    <!-- Десятка -->
+                    <div class="section-block">
+                        <h6 class="section-title">Десятка</h6>
+                        <div class="friends-list">
+                            <div class="friend-item" onclick="showFriendProfile('ЕК')">
+                                <div class="friend-avatar">ЕК</div>
+                                <div class="friend-info">
+                                    <div class="friend-name">Екатерина Котова</div>
+                                    <div class="friend-status">
+                                        <span class="level-indicator">Уровень 15</span>
+                                        <span class="friend-achievements">
+                                            <i class="bi bi-trophy-fill"></i> 18
+                                        </span>
+                                    </div>
+                                </div>
+                                <i class="bi bi-chevron-right"></i>
+                            </div>
+                            <div class="friend-item" onclick="showFriendProfile('ИС')">
+                                <div class="friend-avatar">ИС</div>
+                                <div class="friend-info">
+                                    <div class="friend-name">Игорь Смирнов</div>
+                                    <div class="friend-status">
+                                        <span class="level-indicator">Уровень 9</span>
+                                        <span class="friend-achievements">
+                                            <i class="bi bi-trophy-fill"></i> 12
+                                        </span>
+                                    </div>
+                                </div>
+                                <i class="bi bi-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -411,79 +1142,261 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
 
-        // Модальные окна
-        const conflictDetailsModal = new bootstrap.Modal(document.getElementById('conflictDetailsModal'));
-        const idealDetailsModal = new bootstrap.Modal(document.getElementById('idealDetailsModal'));
+        // Все модальные окна
+        const modals = {
+            newCase: new bootstrap.Modal(document.getElementById('newCaseModal')),
+            insightDetails: new bootstrap.Modal(document.getElementById('insightDetailsModal')),
+            profile: new bootstrap.Modal(document.getElementById('profileModal'))
+        };
 
-        // Функции для навигации
-        function showBrainstormDetails() {
-            conflictDetailsModal.show();
-        }
-
-        function showIKRDetails() {
-            idealDetailsModal.show();
-        }
-
-        // Обработчики фильтров
-        document.querySelectorAll('.filter-scroll .btn').forEach(button => {
-            button.addEventListener('click', function() {
-                // Убираем активный класс у всех кнопок
-                document.querySelectorAll('.filter-scroll .btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                // Добавляем активный класс нажатой кнопке
-                this.classList.add('active');
-                // Здесь будет логика фильтрации задач
-                filterTasks(this.textContent.trim());
+        // Обработка кликов по карточкам
+        document.querySelectorAll('.insight-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const title = this.querySelector('.card-title').textContent;
+                const category = this.querySelector('.category-badge').textContent;
+                const xElement = this.querySelector('[data-element="x-element"]')?.textContent;
+                const insight = this.querySelector('[data-element="insight"]')?.textContent;
+                
+                showInsightDetails(title, category, xElement, insight);
             });
         });
 
-        function filterTasks(filter) {
-            // В реальном приложении здесь будет логика фильтрации
-            console.log('Применён фильтр:', filter);
-        }
-
-        function showFeed() {
-            // Показываем все задачи
-            document.querySelector('.filter-scroll .btn:first-child').click();
-        }
-
-        function showMyTasks() {
-            // Логика для показа личных задач
-            tg.showAlert('Переход к вашим задачам');
-        }
-
-        // Обработка публикации новой задачи
-        document.querySelector('#newProblemModal .btn-primary').addEventListener('click', function() {
-            // В реальном приложении здесь будет отправка данных на сервер
-            tg.showAlert('Задача опубликована!');
-            bootstrap.Modal.getInstance(document.getElementById('newProblemModal')).hide();
-        });
-
-        // Переключение формы в зависимости от уровня
-        document.getElementById('problemLevel').addEventListener('change', function() {
-            const conflictPairForm = document.getElementById('conflictPairForm');
-            const categorySelect = document.getElementById('categorySelect');
+        // Показ деталей инсайта
+        function showInsightDetails(title, category, xElement, insight) {
+            const modal = document.getElementById('insightDetailsModal');
+            modal.querySelector('.modal-title').textContent = title;
+            modal.querySelector('.category-badge').textContent = category;
             
-            if (this.value === '2') {
-                conflictPairForm.classList.remove('d-none');
-                categorySelect.classList.add('d-none');
-            } else {
-                conflictPairForm.classList.add('d-none');
-                categorySelect.classList.remove('d-none');
-            }
-        });
-
-        // Показ профиля
-        function showProfile() {
-            const profileModal = new bootstrap.Modal(document.getElementById('userProfileModal'));
-            profileModal.show();
+            // Обновляем содержимое модального окна
+            if (xElement) modal.querySelector('[data-element="x-element"]').textContent = xElement;
+            if (insight) modal.querySelector('[data-element="insight"]').textContent = insight;
+            
+            modals.insightDetails.show();
         }
 
-        // Модерация предложений
-        function moderateProposal(id, action) {
-            // В реальном приложении здесь будет логика модерации
-            tg.showAlert(`Предложение ${action === 'accept' ? 'принято' : 'отклонено'}`);
+        // Нижняя навигация
+        const navButtons = {
+            insights: document.querySelector('[data-nav="insights"]'),
+            search: document.querySelector('[data-nav="search"]'),
+            saved: document.querySelector('[data-nav="saved"]'),
+            profile: document.querySelector('[data-nav="profile"]')
+        };
+
+        // Обработка навигации
+        document.querySelectorAll('[data-nav]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = this.getAttribute('data-nav');
+                
+                // Убираем активный класс у всех кнопок
+                document.querySelectorAll('[data-nav]').forEach(btn => 
+                    btn.classList.remove('active')
+                );
+                
+                // Активируем нужную кнопку
+                this.classList.add('active');
+
+                // Показываем соответствующий контент
+                switch(section) {
+                    case 'insights':
+                        showInsights();
+                        break;
+                    case 'search':
+                        showSearch();
+                        break;
+                    case 'saved':
+                        showSaved();
+                        break;
+                    case 'profile':
+                        showProfile();
+                        break;
+                }
+            });
+        });
+
+        // Устанавливаем активную вкладку при загрузке
+        document.querySelector('[data-nav="insights"]').classList.add('active');
+
+        // Функции для разных разделов
+        function showInsights() {
+            document.querySelector('.insight-feed').style.display = 'block';
+            document.querySelector('.filter-chips').style.display = 'flex';
+            tg.MainButton.hide();
+        }
+
+        function showSearch() {
+            tg.showPopup({
+                title: 'Поиск инсайтов',
+                message: 'Введите ключевые слова для поиска',
+                buttons: [{
+                    id: "search",
+                    type: "default",
+                    text: "Искать"
+                }]
+            });
+        }
+
+        function showSaved() {
+            tg.showPopup({
+                title: 'Сохранённые инсайты',
+                message: 'Здесь будут отображаться сохранённые вами инсайты',
+                buttons: [{
+                    id: "ok",
+                    type: "default",
+                    text: "OK"
+                }]
+            });
+        }
+
+        function showProfile() {
+            modals.profile.show();
+        }
+
+        // Обработчики лайков
+        document.querySelectorAll('.btn-outline[data-action="like"]').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation(); // Предотвращаем всплытие события
+                const count = this.querySelector('span');
+                const currentLikes = parseInt(count.textContent);
+                count.textContent = currentLikes + 1;
+                
+                // Анимация лайка
+                this.classList.add('liked');
+                setTimeout(() => this.classList.remove('liked'), 200);
+            });
+        });
+
+        // Публикация нового кейса
+        document.querySelector('#newCaseModal .btn-primary').addEventListener('click', function() {
+            const form = document.querySelector('#newCaseModal form');
+            const category = form.querySelector('select').value;
+            const title = form.querySelector('input[type="text"]').value;
+            const metrics = form.querySelector('textarea[placeholder*="метрики"]').value;
+            const goal = form.querySelector('textarea[placeholder*="результат"]').value;
+            
+            if (!title.trim() || !metrics.trim() || !goal.trim()) {
+                tg.showPopup({
+                    title: 'Заполните все поля',
+                    message: 'Для публикации кейса необходимо заполнить все поля',
+                    buttons: [{
+                        id: "ok",
+                        type: "default",
+                        text: "Понятно"
+                    }]
+                });
+                return;
+            }
+
+            // Создаём новую карточку
+            const newCard = document.createElement('div');
+            newCard.className = 'insight-card card mb-4';
+            newCard.style.opacity = '0';
+            newCard.style.transform = 'translateY(20px)';
+            newCard.style.transition = 'all 0.3s ease';
+            
+            newCard.innerHTML = `
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-${category} mb-2">Новый кейс</span>
+                            <h5 class="card-title mb-1">${title}</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    0 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">Метрики</small>
+                            <p class="mb-0">${metrics}</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Цель</small>
+                            <p class="mb-0 text-success">${goal}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Добавляем карточку в начало ленты
+            const feed = document.querySelector('.insight-feed');
+            feed.insertBefore(newCard, feed.firstChild);
+
+            // Анимируем появление
+            setTimeout(() => {
+                newCard.style.opacity = '1';
+                newCard.style.transform = 'translateY(0)';
+            }, 100);
+
+            // Показываем уведомление
+            tg.showPopup({
+                title: 'Кейс опубликован!',
+                message: 'Ваш кейс успешно добавлен в ленту. Теперь другие участники могут предлагать свои инсайты.',
+                buttons: [{
+                    id: "ok",
+                    type: "default",
+                    text: "Отлично"
+                }]
+            });
+
+            // Закрываем модальное окно и очищаем форму
+            modals.newCase.hide();
+            form.reset();
+        });
+
+        // Фильтрация инсайтов
+        document.querySelectorAll('.chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                filterInsights(this.textContent.trim());
+            });
+        });
+
+        function filterInsights(filter) {
+            const cards = document.querySelectorAll('.insight-card');
+            
+            cards.forEach(card => {
+                const category = card.querySelector('.category-badge').textContent;
+                if (filter === 'Все инсайты' || category.includes(filter)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Анимация фильтрации
+            document.querySelector('.insight-feed').style.opacity = '0.8';
+            setTimeout(() => {
+                document.querySelector('.insight-feed').style.opacity = '1';
+            }, 200);
+        }
+
+        // Добавляем стили для анимации лайков
+        const style = document.createElement('style');
+        style.textContent = `
+            .btn-outline.liked {
+                transform: scale(1.2);
+                transition: transform 0.2s;
+            }
+            .insight-card {
+                cursor: pointer;
+            }
+            .insight-feed {
+                transition: opacity 0.2s;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Показ профиля друга
+        function showFriendProfile(initials) {
+            // Здесь можно добавить логику загрузки данных друга
+            showProfile();
         }
     </script>
 </body>
