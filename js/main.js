@@ -86,6 +86,7 @@ document.querySelectorAll('[data-nav]').forEach(link => {
 // Инициализация Telegram Mini App
 let tg = window.Telegram.WebApp;
 tg.expand();
+tg.disableVerticalSwipes();
 
 // Все модальные окна
 const modals = {
