@@ -393,6 +393,98 @@
             align-items: center;
             gap: 4px;
         }
+
+        .progress-mini {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .progress-step {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        .progress-step.active {
+            color: var(--accent-color);
+        }
+
+        .progress-line {
+            width: 12px;
+            height: 2px;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .metric-badge {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            background: rgba(0,0,0,0.05);
+        }
+
+        .stages-progress {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .stage {
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .stage.active {
+            border-color: var(--accent-color);
+        }
+
+        .stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: rgba(0,0,0,0.02);
+            cursor: pointer;
+        }
+
+        .stage-content {
+            padding: 16px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .conflict-pair {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .conflict-element {
+            flex: 1;
+        }
+
+        .conflict-vs {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .element-label {
+            display: block;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .card-actions {
+            padding-top: 16px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
@@ -420,193 +512,13 @@
 
         <!-- Лента инсайтов -->
         <div class="insight-feed">
-            <!-- Кейс 1: Эпическое значение -->
+            <!-- Операционные кейсы -->
             <div class="insight-card card mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start mb-3">
                         <div>
-                            <span class="category-badge category-strategic mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Рутинные задачи как квесты</h5>
-                            <div class="insight-stats">
-                                <span class="insight-stat">
-                                    <i class="bi bi-lightbulb"></i>
-                                    15 инсайтов
-                                </span>
-                            </div>
-                        </div>
-                        <span class="status-badge">Первый этап</span>
-                    </div>
-                    
-                    <div class="insight-detail mb-3">
-                        <div class="mb-2">
-                            <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Низкая мотивация сотрудников при выполнении рутинных задач</p>
-                        </div>
-                        <div>
-                            <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Создать систему "эпических квестов", где каждая рутинная задача становится частью большой миссии</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Кейс 2: Социальное влияние -->
-            <div class="insight-card card mb-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div>
-                            <span class="category-badge category-hr mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Конкуренция как драйвер развития</h5>
-                            <div class="insight-stats">
-                                <span class="insight-stat">
-                                    <i class="bi bi-lightbulb"></i>
-                                    12 инсайтов
-                                </span>
-                            </div>
-                        </div>
-                        <span class="status-badge">Первый этап</span>
-                    </div>
-                    
-                    <div class="insight-detail mb-3">
-                        <div class="mb-2">
-                            <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Отсутствие здоровой конкуренции между отделами</p>
-                        </div>
-                        <div>
-                            <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Внедрить систему межотдельных челленджей с публичными лидербордами и командными достижениями</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Кейс 3: Дефицит и нетерпение -->
-            <div class="insight-card card mb-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div>
-                            <span class="category-badge category-market mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Ограниченные предложения как триггер</h5>
-                            <div class="insight-stats">
-                                <span class="insight-stat">
-                                    <i class="bi bi-lightbulb"></i>
-                                    18 инсайтов
-                                </span>
-                            </div>
-                        </div>
-                        <span class="status-badge">Первый этап</span>
-                    </div>
-                    
-                    <div class="insight-detail mb-3">
-                        <div class="mb-2">
-                            <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Низкая конверсия при запуске новых продуктов</p>
-                        </div>
-                        <div>
-                            <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Создать систему "ранних пташек" с эксклюзивным доступом и ограниченными предложениями</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Кейс 4: Владение и обладание -->
-            <div class="insight-card card mb-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div>
-                            <span class="category-badge category-operational mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Персонализация как мотивация</h5>
-                            <div class="insight-stats">
-                                <span class="insight-stat">
-                                    <i class="bi bi-lightbulb"></i>
-                                    14 инсайтов
-                                </span>
-                            </div>
-                        </div>
-                        <span class="status-badge">Первый этап</span>
-                    </div>
-                    
-                    <div class="insight-detail mb-3">
-                        <div class="mb-2">
-                            <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Низкая вовлечённость в корпоративную культуру</p>
-                        </div>
-                        <div>
-                            <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Внедрить систему персонализации рабочего пространства с возможностью "прокачки" своего места</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Кейс 5: Непредсказуемость -->
-            <div class="insight-card card mb-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div>
-                            <span class="category-badge category-strategic mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Случайные награды как мотиватор</h5>
-                            <div class="insight-stats">
-                                <span class="insight-stat">
-                                    <i class="bi bi-lightbulb"></i>
-                                    16 инсайтов
-                                </span>
-                            </div>
-                        </div>
-                        <span class="status-badge">Первый этап</span>
-                    </div>
-                    
-                    <div class="insight-detail mb-3">
-                        <div class="mb-2">
-                            <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Предсказуемость системы мотивации</p>
-                        </div>
-                        <div>
-                            <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Внедрить систему "счастливых часов" с случайными бонусами за выполнение обычных задач</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Кейс 6: Жалобы как источник инноваций -->
-            <div class="insight-card card mb-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div>
-                            <span class="category-badge category-strategic mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Недовольные клиенты как источник продуктовых идей</h5>
-                            <div class="insight-stats">
-                                <span class="insight-stat">
-                                    <i class="bi bi-lightbulb"></i>
-                                    12 инсайтов
-                                </span>
-                            </div>
-                        </div>
-                        <span class="status-badge">Первый этап</span>
-                    </div>
-                    
-                    <div class="insight-detail mb-3">
-                        <div class="mb-2">
-                            <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Постоянный поток жалоб от клиентов на отсутствие определённых функций</p>
-                        </div>
-                        <div>
-                            <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Создать систему, где жалобы автоматически становятся бэклогом новых фич</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Кейс 7: Текучка как инновация -->
-            <div class="insight-card card mb-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div>
-                            <span class="category-badge category-hr mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Текучка как источник новых связей</h5>
+                            <span class="category-badge category-operational mb-2">Операционный</span>
+                            <h5 class="card-title mb-1">Потери при передаче смен как источник знаний</h5>
                             <div class="insight-stats">
                                 <span class="insight-stat">
                                     <i class="bi bi-lightbulb"></i>
@@ -620,23 +532,52 @@
                     <div class="insight-detail mb-3">
                         <div class="mb-2">
                             <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Высокая текучка кадров в компании</p>
+                            <p class="mb-0">30% задач теряется при передаче между сменами из-за человеческого фактора</p>
                         </div>
                         <div>
                             <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Создать alumni-программу, превращающую бывших сотрудников в амбассадоров и партнёров</p>
+                            <p class="mb-0 text-success">Превратить каждую потерянную задачу в кейс для машинного обучения, где система сама учится находить потенциальные пропуски</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Кейс 8: Конкуренты как ресурс -->
             <div class="insight-card card mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start mb-3">
                         <div>
-                            <span class="category-badge category-market mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Конкуренты как источник клиентов</h5>
+                            <span class="category-badge category-operational mb-2">Операционный</span>
+                            <h5 class="card-title mb-1">Бюрократия как драйвер автоматизации</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    12 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Избыточное количество согласований тормозит все процессы на 40%</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Использовать каждое лишнее согласование как триггер для создания нового автоматического правила в системе</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Стратегические кейсы -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-strategic mb-2">Стратегический</span>
+                            <h5 class="card-title mb-1">Отток клиентов как источник роста</h5>
                             <div class="insight-stats">
                                 <span class="insight-stat">
                                     <i class="bi bi-lightbulb"></i>
@@ -650,23 +591,22 @@
                     <div class="insight-detail mb-3">
                         <div class="mb-2">
                             <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Сильные конкуренты забирают клиентов</p>
+                            <p class="mb-0">25% клиентов уходят к конкурентам из-за отсутствия нужных функций</p>
                         </div>
                         <div>
                             <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Создать платформу, где конкуренты становятся партнёрами в обслуживании клиентов</p>
+                            <p class="mb-0 text-success">Создать программу "Уходя - создавай", где каждый уходящий клиент автоматически становится бета-тестером новых функций</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Кейс 9: Ошибки как обучение -->
             <div class="insight-card card mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start mb-3">
                         <div>
-                            <span class="category-badge category-operational mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Ошибки как источник знаний</h5>
+                            <span class="category-badge category-strategic mb-2">Стратегический</span>
+                            <h5 class="card-title mb-1">Устаревание как источник инноваций</h5>
                             <div class="insight-stats">
                                 <span class="insight-stat">
                                     <i class="bi bi-lightbulb"></i>
@@ -680,23 +620,23 @@
                     <div class="insight-detail mb-3">
                         <div class="mb-2">
                             <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Частые ошибки новых сотрудников в проектах</p>
+                            <p class="mb-0">50% технологической базы требует обновления каждые 2 года</p>
                         </div>
                         <div>
                             <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Создать базу знаний, где каждая ошибка автоматически становится обучающим кейсом</p>
+                            <p class="mb-0 text-success">Превратить процесс устаревания в автоматический генератор новых технологических решений через AI-анализ паттернов износа</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Кейс 10: Задержки как преимущество -->
+            <!-- HR кейсы -->
             <div class="insight-card card mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start mb-3">
                         <div>
-                            <span class="category-badge category-operational mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Задержки как источник лояльности</h5>
+                            <span class="category-badge category-hr mb-2">HR</span>
+                            <h5 class="card-title mb-1">Конфликты как источник синергии</h5>
                             <div class="insight-stats">
                                 <span class="insight-stat">
                                     <i class="bi bi-lightbulb"></i>
@@ -710,143 +650,22 @@
                     <div class="insight-detail mb-3">
                         <div class="mb-2">
                             <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Задержки в доставке заказов</p>
+                            <p class="mb-0">60% проектов страдают от межличностных конфликтов в команде</p>
                         </div>
                         <div>
                             <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Превратить время ожидания в развлекательный квест с бонусами</p>
+                            <p class="mb-0 text-success">Создать систему "Конфликт как проект", где каждое противоречие автоматически запускает новый инновационный микропроект</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Кейс 11: Отказы как возможность -->
             <div class="insight-card card mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start mb-3">
                         <div>
-                            <span class="category-badge category-market mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Отказы как источник новых продуктов</h5>
-                            <div class="insight-stats">
-                                <span class="insight-stat">
-                                    <i class="bi bi-lightbulb"></i>
-                                    7 инсайтов
-                                </span>
-                            </div>
-                        </div>
-                        <span class="status-badge">Первый этап</span>
-                    </div>
-                    
-                    <div class="insight-detail mb-3">
-                        <div class="mb-2">
-                            <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Высокий процент отказов на этапе оформления заказа</p>
-                        </div>
-                        <div>
-                            <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Создать новую линейку продуктов на основе причин отказа</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Кейс 12: Сезонность как драйвер -->
-            <div class="insight-card card mb-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div>
-                            <span class="category-badge category-strategic mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Сезонность как источник инноваций</h5>
-                            <div class="insight-stats">
-                                <span class="insight-stat">
-                                    <i class="bi bi-lightbulb"></i>
-                                    13 инсайтов
-                                </span>
-                            </div>
-                        </div>
-                        <span class="status-badge">Первый этап</span>
-                    </div>
-                    
-                    <div class="insight-detail mb-3">
-                        <div class="mb-2">
-                            <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Сильные сезонные колебания спроса</p>
-                        </div>
-                        <div>
-                            <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Создать анти-сезонные продукты, использующие простаивающие ресурсы</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Кейс 13: Возвраты как развитие -->
-            <div class="insight-card card mb-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div>
-                            <span class="category-badge category-operational mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Возвраты как источник улучшений</h5>
-                            <div class="insight-stats">
-                                <span class="insight-stat">
-                                    <i class="bi bi-lightbulb"></i>
-                                    10 инсайтов
-                                </span>
-                            </div>
-                        </div>
-                        <span class="status-badge">Первый этап</span>
-                    </div>
-                    
-                    <div class="insight-detail mb-3">
-                        <div class="mb-2">
-                            <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Высокий процент возвратов товара</p>
-                        </div>
-                        <div>
-                            <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Создать marketplace возвращённых товаров с уникальными историями</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Кейс 14: Опоздания как инновация -->
-            <div class="insight-card card mb-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div>
-                            <span class="category-badge category-hr mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Опоздания как источник гибкости</h5>
-                            <div class="insight-stats">
-                                <span class="insight-stat">
-                                    <i class="bi bi-lightbulb"></i>
-                                    6 инсайтов
-                                </span>
-                            </div>
-                        </div>
-                        <span class="status-badge">Первый этап</span>
-                    </div>
-                    
-                    <div class="insight-detail mb-3">
-                        <div class="mb-2">
-                            <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Частые опоздания сотрудников на работу</p>
-                        </div>
-                        <div>
-                            <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Внедрить систему плавающего графика, где опоздания становятся частью рабочего процесса</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Кейс 15: Конфликты как развитие -->
-            <div class="insight-card card mb-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div>
-                            <span class="category-badge category-hr mb-2">Инсайт</span>
-                            <h5 class="card-title mb-1">Конфликты как источник роста</h5>
+                            <span class="category-badge category-hr mb-2">HR</span>
+                            <h5 class="card-title mb-1">Текучка как источник нетворкинга</h5>
                             <div class="insight-stats">
                                 <span class="insight-stat">
                                     <i class="bi bi-lightbulb"></i>
@@ -860,15 +679,306 @@
                     <div class="insight-detail mb-3">
                         <div class="mb-2">
                             <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-0">Постоянные конфликты между отделами</p>
+                            <p class="mb-0">Ежемесячная текучка кадров составляет 15% от штата</p>
                         </div>
                         <div>
                             <small class="text-muted d-block mb-1">Инсайт</small>
-                            <p class="mb-0 text-success">Создать систему кросс-функциональных проектов, где конфликты становятся источником новых идей</p>
+                            <p class="mb-0 text-success">Создать самообучающуюся сеть "Профи-поток", где каждый уволившийся автоматически становится внешним агентом развития</p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Рыночные кейсы -->
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-market mb-2">Рыночный</span>
+                            <h5 class="card-title mb-1">Жалобы как генератор продуктов</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    16 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">80% клиентских жалоб связаны с отсутствием нужных функций</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Создать систему "Жалоба-продукт", где каждая претензия автоматически преобразуется в техническое задание для нового продукта</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-card card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-market mb-2">Рыночный</span>
+                            <h5 class="card-title mb-1">Конкуренция как ресурс роста</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-lightbulb"></i>
+                                    13 инсайтов
+                                </span>
+                            </div>
+                        </div>
+                        <span class="status-badge">Первый этап</span>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-0">Ежемесячно теряем 10% рынка из-за новых конкурентов</p>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Инсайт</small>
+                            <p class="mb-0 text-success">Создать экосистему "Конкурент-партнёр", где каждый новый конкурент автоматически получает предложение стать частью растущей сети</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Мой новый кейс (пример) -->
+            <div class="insight-card card mb-4" data-my-case="true">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-operational mb-2">Мой кейс</span>
+                            <h5 class="card-title mb-1">Потери при передаче смен</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-people-fill"></i>
+                                    1 участник
+                                </span>
+                                <span class="insight-stat">
+                                    <i class="bi bi-clock"></i>
+                                    Только что
+                                </span>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="status-badge mb-2">Новый</span>
+                            <div class="progress-mini">
+                                <div class="progress-step active">
+                                    <i class="bi bi-1-circle-fill"></i>
+                                </div>
+                                <div class="progress-line"></div>
+                                <div class="progress-step">
+                                    <i class="bi bi-2-circle"></i>
+                                </div>
+                                <div class="progress-line"></div>
+                                <div class="progress-step">
+                                    <i class="bi bi-3-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-3">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-2">30% задач теряется при передаче между сменами</p>
+                            <div class="d-flex gap-2">
+                                <span class="metric-badge">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                    30% потерь
+                                </span>
+                                <span class="metric-badge">
+                                    <i class="bi bi-people"></i>
+                                    3 смены
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="stages-progress">
+                            <!-- Этап 1: Конфликтующая пара -->
+                            <div class="stage active">
+                                <div class="stage-header" data-bs-toggle="collapse" data-bs-target="#conflictStageNew">
+                                    <div>
+                                        <h6 class="mb-1">Конфликтующая пара</h6>
+                                        <small class="text-muted">Нужно 3 участника для формирования</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary">
+                                        <i class="bi bi-plus-lg"></i>
+                                        Участвовать
+                                    </button>
+                                </div>
+                                <div id="conflictStageNew" class="stage-content collapse show">
+                                    <div class="mb-3">
+                                        <div class="alert alert-info">
+                                            <i class="bi bi-info-circle me-2"></i>
+                                            Сформулируйте противоречие, которое приводит к потере задач
+                                        </div>
+                                    </div>
+                                    <div class="conflict-pair">
+                                        <div class="conflict-element">
+                                            <span class="element-label">Что должно быть?</span>
+                                            <input type="text" class="form-control form-control-sm" placeholder="Например: Быстрая передача">
+                                        </div>
+                                        <div class="conflict-vs">VS</div>
+                                        <div class="conflict-element">
+                                            <span class="element-label">Чему это мешает?</span>
+                                            <input type="text" class="form-control form-control-sm" placeholder="Например: Точность информации">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Этап 2: ИКР -->
+                            <div class="stage">
+                                <div class="stage-header">
+                                    <div>
+                                        <h6 class="mb-1">Идеальный конечный результат</h6>
+                                        <small class="text-muted">Откроется после формирования конфликта</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-secondary" disabled>
+                                        <i class="bi bi-lock"></i>
+                                        Заблокировано
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Этап 3: Инсайты -->
+                            <div class="stage">
+                                <div class="stage-header">
+                                    <div>
+                                        <h6 class="mb-1">Инсайты</h6>
+                                        <small class="text-muted">Откроется после определения ИКР</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-secondary" disabled>
+                                        <i class="bi bi-lock"></i>
+                                        Заблокировано
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions d-flex justify-content-between align-items-center">
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-outline">
+                                <i class="bi bi-bookmark"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline">
+                                <i class="bi bi-share"></i>
+                            </button>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <span class="metric-badge">
+                                <i class="bi bi-clock"></i>
+                                23:59:59
+                            </span>
+                            <button class="btn btn-sm btn-primary">
+                                Обсудить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                .progress-mini {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                }
+
+                .progress-step {
+                    width: 20px;
+                    height: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #666;
+                }
+
+                .progress-step.active {
+                    color: var(--accent-color);
+                }
+
+                .progress-line {
+                    width: 12px;
+                    height: 2px;
+                    background: rgba(0,0,0,0.1);
+                }
+
+                .metric-badge {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    padding: 4px 8px;
+                    border-radius: 8px;
+                    font-size: 12px;
+                    background: rgba(0,0,0,0.05);
+                }
+
+                .stages-progress {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                }
+
+                .stage {
+                    border: 1px solid rgba(0,0,0,0.1);
+                    border-radius: 12px;
+                    overflow: hidden;
+                }
+
+                .stage.active {
+                    border-color: var(--accent-color);
+                }
+
+                .stage-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 12px;
+                    background: rgba(0,0,0,0.02);
+                    cursor: pointer;
+                }
+
+                .stage-content {
+                    padding: 16px;
+                    border-top: 1px solid rgba(0,0,0,0.1);
+                }
+
+                .conflict-pair {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                }
+
+                .conflict-element {
+                    flex: 1;
+                }
+
+                .conflict-vs {
+                    font-weight: 600;
+                    color: var(--accent-color);
+                }
+
+                .element-label {
+                    display: block;
+                    font-size: 12px;
+                    color: #666;
+                    margin-bottom: 4px;
+                }
+
+                .card-actions {
+                    padding-top: 16px;
+                    border-top: 1px solid rgba(0,0,0,0.1);
+                }
+            </style>
         </div>
     </div>
 
@@ -1362,36 +1472,36 @@
             const cards = document.querySelectorAll('.insight-card');
             
             cards.forEach(card => {
-                const category = card.querySelector('.category-badge').textContent;
-                if (filter === 'Все инсайты' || category.includes(filter)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
+                const category = card.querySelector('.category-badge').textContent.toLowerCase();
+                const shouldShow = filter === 'Все инсайты' || 
+                                 (filter === 'Операционные' && category.includes('операционный')) ||
+                                 (filter === 'Стратегические' && category.includes('стратегический')) ||
+                                 (filter === 'HR' && category.includes('hr')) ||
+                                 (filter === 'Рыночные' && category.includes('рыночный')) ||
+                                 (filter === 'Мои кейсы' && card.hasAttribute('data-my-case'));
+
+                card.style.display = shouldShow ? 'block' : 'none';
+                
+                // Анимация появления/исчезновения
+                if (shouldShow) {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
                 }
             });
-
-            // Анимация фильтрации
-            document.querySelector('.insight-feed').style.opacity = '0.8';
-            setTimeout(() => {
-                document.querySelector('.insight-feed').style.opacity = '1';
-            }, 200);
         }
 
-        // Добавляем стили для анимации лайков
-        const style = document.createElement('style');
-        style.textContent = `
-            .btn-outline.liked {
-                transform: scale(1.2);
-                transition: transform 0.2s;
-            }
+        // Добавляем стили для анимации фильтрации
+        const filterStyle = document.createElement('style');
+        filterStyle.textContent = `
             .insight-card {
-                cursor: pointer;
-            }
-            .insight-feed {
-                transition: opacity 0.2s;
+                transition: opacity 0.3s ease, transform 0.3s ease;
             }
         `;
-        document.head.appendChild(style);
+        document.head.appendChild(filterStyle);
 
         // Показ профиля друга
         function showFriendProfile(initials) {
