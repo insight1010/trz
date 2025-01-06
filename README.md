@@ -1,6 +1,6 @@
-# InsightFlow
+# TRZ
 
-Веб-приложение для управления бизнес-инсайтами и решения проблем с использованием методологии ТРИЗ.
+Веб-приложение для управления бизнес-инсайтами и решения проблем с использованием методологии ТРИЗ (Теория Решения Изобретательских Задач).
 
 ## Особенности
 
@@ -22,7 +22,7 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/yourusername/insight1010.git
+git clone https://github.com/yourusername/TRZ.git
 ```
 
 2. Откройте `index.html` в браузере или разверните на веб-сервере.
@@ -30,7 +30,7 @@ git clone https://github.com/yourusername/insight1010.git
 ## Структура проекта
 
 ```
-insight1010/
+TRZ/
 ├── index.html          # Основной HTML файл
 ├── styles/             # CSS стили
 ├── js/                 # JavaScript файлы

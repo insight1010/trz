@@ -2,7 +2,7 @@
 const sections = {
     insights: {
         element: document.querySelector('.insight-feed'),
-        title: 'InsightFlow',
+        title: 'TRZ',
         filters: true
     },
     search: {
