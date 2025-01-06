@@ -1,225 +1,257 @@
 :root {
-    /* Основные цвета в стиле Vision Pro */
-    --vision-bg: rgba(20, 20, 25, 0.95);
-    --vision-card: rgba(28, 28, 35, 0.85);
-    --vision-text: rgba(255, 255, 255, 0.95);
-    --vision-text-secondary: rgba(255, 255, 255, 0.65);
-    --vision-accent: rgba(0, 125, 250, 0.95);
-    --vision-border: rgba(255, 255, 255, 0.1);
-    --vision-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    /* Основная цветовая схема */
+    --primary: #2563EB;
+    --primary-light: #60A5FA;
+    --primary-dark: #1E40AF;
+    --surface: #FFFFFF;
+    --surface-light: #F8FAFC;
+    --surface-dark: #1E293B;
+    --text: #1E293B;
+    --text-secondary: #64748B;
+    --text-light: #94A3B8;
     
-    /* Тени и эффекты */
-    --vision-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    --vision-glow: 0 0 20px rgba(0, 125, 250, 0.3);
+    /* Акцентные цвета */
+    --accent-success: #10B981;
+    --accent-warning: #F59E0B;
+    --accent-error: #EF4444;
+    
+    /* Эффекты и тени */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    
+    /* Скругления */
+    --radius-sm: 0.5rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.5rem;
+    --radius-full: 9999px;
     
     /* Анимации */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Базовые стили */
 body {
-    background: var(--vision-bg);
-    color: var(--vision-text);
     font-family: -apple-system, system-ui, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
-    -webkit-font-smoothing: antialiased;
+    background: var(--surface-light);
+    color: var(--text);
     line-height: 1.5;
-    letter-spacing: -0.01em;
-}
-
-/* Сплэш-экран */
-.splash-screen {
-    background: var(--vision-bg);
-    backdrop-filter: blur(20px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 2rem;
-    text-align: center;
-}
-
-.splash-logo::before {
-    background: var(--vision-gradient);
-    box-shadow: var(--vision-glow);
-}
-
-.splash-slogan .primary-text {
-    font-size: 3.5rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.8));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: var(--vision-glow);
-    letter-spacing: -0.02em;
-    animation: float 3s ease-in-out infinite;
-}
-
-.splash-slogan .secondary-text {
-    color: var(--vision-text-secondary);
-    font-size: 1.4rem;
-    font-weight: 500;
-    opacity: 0.9;
-    margin-top: 0.5rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Карточки */
 .insight-card {
-    background: var(--vision-card);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--vision-border);
-    border-radius: 20px;
-    padding: 1.5rem;
-    margin: 1rem 0;
-    transition: var(--transition-smooth);
-    box-shadow: var(--vision-shadow);
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
 }
 
-.insight-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--vision-glow);
-    border-color: rgba(255, 255, 255, 0.2);
+.insight-card:active {
+    transform: scale(0.98);
+    box-shadow: var(--shadow-inner);
 }
 
 /* Бейджи */
 .category-badge {
-    background: var(--vision-gradient);
-    border: 1px solid var(--vision-border);
-    color: var(--vision-text);
     font-size: 0.875rem;
     padding: 0.5rem 1rem;
-    border-radius: 1rem;
-    backdrop-filter: blur(10px);
+    border-radius: var(--radius-full);
+    font-weight: 500;
+    background: var(--surface-light);
+    color: var(--primary);
+    box-shadow: var(--shadow-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-badge {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--surface-light);
+    color: var(--text-secondary);
 }
 
 /* Навигация */
-.tg-header {
-    background: var(--vision-card);
-    backdrop-filter: blur(30px);
-    border-bottom: 1px solid var(--vision-border);
-}
-
-.header-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.8));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Фильтры */
-.filter-section {
-    background: var(--vision-card);
-    backdrop-filter: blur(30px);
-    border-bottom: 1px solid var(--vision-border);
-}
-
-.chip {
-    background: var(--vision-gradient);
-    border: 1px solid var(--vision-border);
-    color: var(--vision-text-secondary);
-    transition: var(--transition-smooth);
-}
-
-.chip.active {
-    background: var(--vision-accent);
-    color: var(--vision-text);
-    border-color: transparent;
-    box-shadow: var(--vision-glow);
-}
-
-/* Нижняя навигация */
 .bottom-nav {
-    background: var(--vision-card);
-    backdrop-filter: blur(30px);
-    border-top: 1px solid var(--vision-border);
+    background: var(--surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1rem;
 }
 
 .nav-link {
-    color: var(--vision-text-secondary);
-    transition: var(--transition-smooth);
+    color: var(--text-secondary);
+    transition: var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
 }
 
 .nav-link.active {
-    color: var(--vision-text);
+    color: var(--primary);
 }
 
 .nav-link i {
     font-size: 1.5rem;
-    margin-bottom: 0.25rem;
 }
 
 /* Кнопка добавления */
 .btn-add {
-    background: var(--vision-accent);
-    color: var(--vision-text);
-    border: none;
-    width: 56px;
-    height: 56px;
-    border-radius: 28px;
+    background: var(--primary);
+    color: white;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1.5rem;
-    box-shadow: var(--vision-glow);
-    transform: translateY(-20px);
-    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-1.5rem);
+    transition: var(--transition-normal);
 }
 
 .btn-add:hover {
-    transform: translateY(-22px);
-    box-shadow: 0 0 30px rgba(0, 125, 250, 0.4);
+    transform: translateY(-1.75rem);
+    box-shadow: 0 15px 20px rgba(37, 99, 235, 0.2);
 }
 
-/* Модальные окна */
-.modal-content {
-    background: var(--vision-card);
-    backdrop-filter: blur(30px);
-    border: 1px solid var(--vision-border);
-    border-radius: 20px;
+/* Сплэш-экран */
+.splash-screen {
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
 }
 
-.modal-header {
-    border-bottom: 1px solid var(--vision-border);
+.splash-slogan .primary-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    line-height: 1.2;
 }
 
-.modal-footer {
-    border-top: 1px solid var(--vision-border);
-}
-
-/* Формы */
-.form-control {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--vision-border);
-    color: var(--vision-text);
-    border-radius: 12px;
-    padding: 0.75rem 1rem;
-}
-
-.form-control:focus {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--vision-accent);
-    box-shadow: var(--vision-glow);
+.splash-slogan .secondary-text {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: 1rem;
 }
 
 /* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
 }
 
-@keyframes glow {
-    0%, 100% { box-shadow: var(--vision-glow); }
-    50% { box-shadow: 0 0 30px rgba(0, 125, 250, 0.5); }
-}
-
 /* Адаптивность */
 @media (max-width: 768px) {
     .insight-card {
-        padding: 1rem;
+        margin: 1rem 0;
     }
     
-    .category-badge {
-        font-size: 0.75rem;
-        padding: 0.375rem 0.75rem;
+    .splash-slogan .primary-text {
+        font-size: 2rem;
     }
     
-    .header-title {
-        font-size: 1.125rem;
+    .bottom-nav {
+        padding: 0.75rem;
     }
+}
+
+/* Модальные окна */
+.modal-content {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: none;
+    box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+    border-bottom: none;
+    padding: 1.5rem;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    border-top: none;
+    padding: 1.5rem;
+}
+
+/* Формы */
+.form-control {
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.75rem 1rem;
+    transition: var(--transition-fast);
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Кнопки */
+.btn {
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: var(--transition-fast);
+}
+
+.btn-primary {
+    background: var(--primary);
+    border: none;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+/* Фильтры */
+.chip {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    background: var(--surface);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: var(--transition-fast);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.chip.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
 } 

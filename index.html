@@ -983,7 +983,145 @@
     <!-- Основной контент -->
     <div class="container main-content">
         <div class="insight-feed">
-            <!-- Карточки инсайтов -->
+            <!-- Мой кейс (первым в ленте) -->
+            <div class="insight-card card mb-4" data-my-case="true">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="category-badge category-operational mb-2">Мой кейс</span>
+                            <h5 class="card-title mb-1">Потери при передаче смен</h5>
+                            <div class="insight-stats">
+                                <span class="insight-stat">
+                                    <i class="bi bi-people-fill"></i>
+                                    1 участник
+                                </span>
+                                <span class="insight-stat">
+                                    <i class="bi bi-clock"></i>
+                                    Только что
+                                </span>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="status-badge mb-2">Новый</span>
+                            <div class="progress-mini">
+                                <div class="progress-step active">
+                                    <i class="bi bi-1-circle-fill"></i>
+                                </div>
+                                <div class="progress-line"></div>
+                                <div class="progress-step">
+                                    <i class="bi bi-2-circle"></i>
+                                </div>
+                                <div class="progress-line"></div>
+                                <div class="progress-step">
+                                    <i class="bi bi-3-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="insight-detail mb-3">
+                        <div class="mb-3">
+                            <small class="text-muted d-block mb-1">X-элемент</small>
+                            <p class="mb-2">30% задач теряется при передаче между сменами</p>
+                            <div class="d-flex gap-2">
+                                <span class="metric-badge">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                    30% потерь
+                                </span>
+                                <span class="metric-badge">
+                                    <i class="bi bi-people"></i>
+                                    3 смены
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="stages-progress">
+                            <!-- Этап 1: Конфликтующая пара -->
+                            <div class="stage active">
+                                <div class="stage-header" data-bs-toggle="collapse" data-bs-target="#conflictStageNew">
+                                    <div>
+                                        <h6 class="mb-1">Конфликтующая пара</h6>
+                                        <small class="text-muted">Нужно 3 участника для формирования</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary">
+                                        <i class="bi bi-plus-lg"></i>
+                                        Участвовать
+                                    </button>
+                                </div>
+                                <div id="conflictStageNew" class="stage-content collapse show">
+                                    <div class="mb-3">
+                                        <div class="alert alert-info">
+                                            <i class="bi bi-info-circle me-2"></i>
+                                            Сформулируйте противоречие, которое приводит к потере задач
+                                        </div>
+                                    </div>
+                                    <div class="conflict-pair">
+                                        <div class="conflict-element">
+                                            <span class="element-label">Что должно быть?</span>
+                                            <input type="text" class="form-control form-control-sm" placeholder="Например: Быстрая передача">
+                                        </div>
+                                        <div class="conflict-vs">VS</div>
+                                        <div class="conflict-element">
+                                            <span class="element-label">Чему это мешает?</span>
+                                            <input type="text" class="form-control form-control-sm" placeholder="Например: Точность информации">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Этап 2: ИКР -->
+                            <div class="stage">
+                                <div class="stage-header">
+                                    <div>
+                                        <h6 class="mb-1">Идеальный конечный результат</h6>
+                                        <small class="text-muted">Откроется после формирования конфликта</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-secondary" disabled>
+                                        <i class="bi bi-lock"></i>
+                                        Заблокировано
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Этап 3: Инсайты -->
+                            <div class="stage">
+                                <div class="stage-header">
+                                    <div>
+                                        <h6 class="mb-1">Инсайты</h6>
+                                        <small class="text-muted">Откроется после определения ИКР</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-secondary" disabled>
+                                        <i class="bi bi-lock"></i>
+                                        Заблокировано
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions d-flex justify-content-between align-items-center">
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-outline">
+                                <i class="bi bi-bookmark"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline">
+                                <i class="bi bi-share"></i>
+                            </button>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <span class="metric-badge">
+                                <i class="bi bi-clock"></i>
+                                23:59:59
+                            </span>
+                            <button class="btn btn-sm btn-primary">
+                                Обсудить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Остальные карточки -->
             <!-- Операционные кейсы -->
             <div class="insight-card card mb-4">
                 <div class="card-body">
@@ -1668,238 +1806,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Мой новый кейс (пример) -->
-            <div class="insight-card card mb-4" data-my-case="true">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div>
-                            <span class="category-badge category-operational mb-2">Мой кейс</span>
-                            <h5 class="card-title mb-1">Потери при передаче смен</h5>
-                            <div class="insight-stats">
-                                <span class="insight-stat">
-                                    <i class="bi bi-people-fill"></i>
-                                    1 участник
-                                </span>
-                                <span class="insight-stat">
-                                    <i class="bi bi-clock"></i>
-                                    Только что
-                                </span>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-column align-items-end">
-                            <span class="status-badge mb-2">Новый</span>
-                            <div class="progress-mini">
-                                <div class="progress-step active">
-                                    <i class="bi bi-1-circle-fill"></i>
-                                </div>
-                                <div class="progress-line"></div>
-                                <div class="progress-step">
-                                    <i class="bi bi-2-circle"></i>
-                                </div>
-                                <div class="progress-line"></div>
-                                <div class="progress-step">
-                                    <i class="bi bi-3-circle"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="insight-detail mb-3">
-                        <div class="mb-3">
-                            <small class="text-muted d-block mb-1">X-элемент</small>
-                            <p class="mb-2">30% задач теряется при передаче между сменами</p>
-                            <div class="d-flex gap-2">
-                                <span class="metric-badge">
-                                    <i class="bi bi-exclamation-triangle"></i>
-                                    30% потерь
-                                </span>
-                                <span class="metric-badge">
-                                    <i class="bi bi-people"></i>
-                                    3 смены
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="stages-progress">
-                            <!-- Этап 1: Конфликтующая пара -->
-                            <div class="stage active">
-                                <div class="stage-header" data-bs-toggle="collapse" data-bs-target="#conflictStageNew">
-                                    <div>
-                                        <h6 class="mb-1">Конфликтующая пара</h6>
-                                        <small class="text-muted">Нужно 3 участника для формирования</small>
-                                    </div>
-                                    <button class="btn btn-sm btn-primary">
-                                        <i class="bi bi-plus-lg"></i>
-                                        Участвовать
-                                    </button>
-                                </div>
-                                <div id="conflictStageNew" class="stage-content collapse show">
-                                    <div class="mb-3">
-                                        <div class="alert alert-info">
-                                            <i class="bi bi-info-circle me-2"></i>
-                                            Сформулируйте противоречие, которое приводит к потере задач
-                                        </div>
-                                    </div>
-                                    <div class="conflict-pair">
-                                        <div class="conflict-element">
-                                            <span class="element-label">Что должно быть?</span>
-                                            <input type="text" class="form-control form-control-sm" placeholder="Например: Быстрая передача">
-                                        </div>
-                                        <div class="conflict-vs">VS</div>
-                                        <div class="conflict-element">
-                                            <span class="element-label">Чему это мешает?</span>
-                                            <input type="text" class="form-control form-control-sm" placeholder="Например: Точность информации">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Этап 2: ИКР -->
-                            <div class="stage">
-                                <div class="stage-header">
-                                    <div>
-                                        <h6 class="mb-1">Идеальный конечный результат</h6>
-                                        <small class="text-muted">Откроется после формирования конфликта</small>
-                                    </div>
-                                    <button class="btn btn-sm btn-outline-secondary" disabled>
-                                        <i class="bi bi-lock"></i>
-                                        Заблокировано
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Этап 3: Инсайты -->
-                            <div class="stage">
-                                <div class="stage-header">
-                                    <div>
-                                        <h6 class="mb-1">Инсайты</h6>
-                                        <small class="text-muted">Откроется после определения ИКР</small>
-                                    </div>
-                                    <button class="btn btn-sm btn-outline-secondary" disabled>
-                                        <i class="bi bi-lock"></i>
-                                        Заблокировано
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-actions d-flex justify-content-between align-items-center">
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-sm btn-outline">
-                                <i class="bi bi-bookmark"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline">
-                                <i class="bi bi-share"></i>
-                            </button>
-                        </div>
-                        <div class="d-flex gap-2">
-                            <span class="metric-badge">
-                                <i class="bi bi-clock"></i>
-                                23:59:59
-                            </span>
-                            <button class="btn btn-sm btn-primary">
-                                Обсудить
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <style>
-                .progress-mini {
-                    display: flex;
-                    align-items: center;
-                    gap: 4px;
-                }
-
-                .progress-step {
-                    width: 20px;
-                    height: 20px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: #666;
-                }
-
-                .progress-step.active {
-                    color: var(--accent-color);
-                }
-
-                .progress-line {
-                    width: 12px;
-                    height: 2px;
-                    background: rgba(0,0,0,0.1);
-                }
-
-                .metric-badge {
-                    display: flex;
-                    align-items: center;
-                    gap: 4px;
-                    padding: 4px 8px;
-                    border-radius: 8px;
-                    font-size: 12px;
-                    background: rgba(0,0,0,0.05);
-                }
-
-                .stages-progress {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 16px;
-                }
-
-                .stage {
-                    border: 1px solid rgba(0,0,0,0.1);
-                    border-radius: 12px;
-                    overflow: hidden;
-                }
-
-                .stage.active {
-                    border-color: var(--accent-color);
-                }
-
-                .stage-header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 12px;
-                    background: rgba(0,0,0,0.02);
-                    cursor: pointer;
-                }
-
-                .stage-content {
-                    padding: 16px;
-                    border-top: 1px solid rgba(0,0,0,0.1);
-                }
-
-                .conflict-pair {
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                }
-
-                .conflict-element {
-                    flex: 1;
-                }
-
-                .conflict-vs {
-                    font-weight: 600;
-                    color: var(--accent-color);
-                }
-
-                .element-label {
-                    display: block;
-                    font-size: 12px;
-                    color: #666;
-                    margin-bottom: 4px;
-                }
-
-                .card-actions {
-                    padding-top: 16px;
-                    border-top: 1px solid rgba(0,0,0,0.1);
-                }
-            </style>
 
             <!-- Кейсы по менеджменту -->
             <div class="insight-card card mb-4">
@@ -2660,6 +2566,19 @@
         // Инициализация Telegram Mini App
         let tg = window.Telegram.WebApp;
         tg.expand();
+        tg.disableVerticalSwipes();
+
+        // Скрываем сплэш-экран после загрузки
+        document.addEventListener('DOMContentLoaded', function() {
+            const splashScreen = document.querySelector('.splash-screen');
+            setTimeout(() => {
+                splashScreen.style.opacity = '0';
+                splashScreen.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                }, 300);
+            }, 1000);
+        });
 
         // Все модальные окна
         const modals = {
