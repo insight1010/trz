@@ -1,104 +1,214 @@
 :root {
-    --tg-theme-bg-color: #FFFFFF;
-    --tg-theme-button-color: #2563EB;
-    --tg-theme-button-text-color: #ffffff;
-    --primary-color: #1E293B;
-    --secondary-color: #3B82F6;
-    --accent-color: #60A5FA;
-    --success-color: #10B981;
-    --warning-color: #F59E0B;
-    --surface-color: #F8FAFC;
-    --neo-shadow: 
-        8px 8px 16px rgba(0, 0, 0, 0.03),
-        -8px -8px 16px rgba(255, 255, 255, 0.8);
-    --neo-shadow-inset: 
-        inset 2px 2px 5px rgba(0, 0, 0, 0.05),
-        inset -2px -2px 5px rgba(255, 255, 255, 0.8);
+    /* Основные цвета в стиле Vision Pro */
+    --vision-bg: rgba(20, 20, 25, 0.95);
+    --vision-card: rgba(28, 28, 35, 0.85);
+    --vision-text: rgba(255, 255, 255, 0.95);
+    --vision-text-secondary: rgba(255, 255, 255, 0.65);
+    --vision-accent: rgba(0, 125, 250, 0.95);
+    --vision-border: rgba(255, 255, 255, 0.1);
+    --vision-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    
+    /* Тени и эффекты */
+    --vision-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --vision-glow: 0 0 20px rgba(0, 125, 250, 0.3);
+    
+    /* Анимации */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
-    background-color: var(--tg-theme-bg-color);
-    color: var(--primary-color);
+    background: var(--vision-bg);
+    color: var(--vision-text);
     font-family: -apple-system, system-ui, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
-    padding-bottom: 80px;
-    max-width: 100vw;
-    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
 }
 
-.navbar {
-    background: rgba(255, 255, 255, 0.8);
+/* Сплэш-экран */
+.splash-screen {
+    background: var(--vision-bg);
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 
+.splash-logo::before {
+    background: var(--vision-gradient);
+    box-shadow: var(--vision-glow);
+}
+
+.splash-slogan .primary-text {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.7));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: var(--vision-glow);
+}
+
+.splash-slogan .secondary-text {
+    color: var(--vision-text-secondary);
+    font-size: 1.2rem;
+}
+
+/* Карточки */
 .insight-card {
-    border: none;
-    border-radius: 24px;
-    background: var(--surface-color);
-    box-shadow: var(--neo-shadow);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    margin: 20px 0;
-    overflow: hidden;
+    background: var(--vision-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--vision-border);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    transition: var(--transition-smooth);
+    box-shadow: var(--vision-shadow);
 }
 
-.insight-card:active {
-    transform: scale(0.98);
-    box-shadow: var(--neo-shadow-inset);
+.insight-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--vision-glow);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
+/* Бейджи */
 .category-badge {
-    font-size: 13px;
-    padding: 8px 16px;
-    border-radius: 16px;
-    font-weight: 500;
-    letter-spacing: -0.2px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: var(--neo-shadow);
+    background: var(--vision-gradient);
+    border: 1px solid var(--vision-border);
+    color: var(--vision-text);
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
 }
 
-.category-badge::before {
-    content: '';
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: currentColor;
-    animation: pulse 2s infinite;
+/* Навигация */
+.tg-header {
+    background: var(--vision-card);
+    backdrop-filter: blur(30px);
+    border-bottom: 1px solid var(--vision-border);
 }
 
-.category-hr { background: #EEF2FF; color: #4F46E5; }
-.category-marketing { background: #FDF2F8; color: #DB2777; }
-.category-management { background: #ECFDF5; color: #059669; }
-.category-operations { background: #FEF3C7; color: #D97706; }
-.category-strategy { background: #EFF6FF; color: #2563EB; }
+.header-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.8));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-/* Остальные стили из index.html */
-/* ... */
+/* Фильтры */
+.filter-section {
+    background: var(--vision-card);
+    backdrop-filter: blur(30px);
+    border-bottom: 1px solid var(--vision-border);
+}
 
+.chip {
+    background: var(--vision-gradient);
+    border: 1px solid var(--vision-border);
+    color: var(--vision-text-secondary);
+    transition: var(--transition-smooth);
+}
+
+.chip.active {
+    background: var(--vision-accent);
+    color: var(--vision-text);
+    border-color: transparent;
+    box-shadow: var(--vision-glow);
+}
+
+/* Нижняя навигация */
+.bottom-nav {
+    background: var(--vision-card);
+    backdrop-filter: blur(30px);
+    border-top: 1px solid var(--vision-border);
+}
+
+.nav-link {
+    color: var(--vision-text-secondary);
+    transition: var(--transition-smooth);
+}
+
+.nav-link.active {
+    color: var(--vision-text);
+}
+
+.nav-link i {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+/* Кнопка добавления */
+.btn-add {
+    background: var(--vision-accent);
+    color: var(--vision-text);
+    border: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 28px;
+    font-size: 1.5rem;
+    box-shadow: var(--vision-glow);
+    transform: translateY(-20px);
+    transition: var(--transition-smooth);
+}
+
+.btn-add:hover {
+    transform: translateY(-22px);
+    box-shadow: 0 0 30px rgba(0, 125, 250, 0.4);
+}
+
+/* Модальные окна */
+.modal-content {
+    background: var(--vision-card);
+    backdrop-filter: blur(30px);
+    border: 1px solid var(--vision-border);
+    border-radius: 20px;
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--vision-border);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--vision-border);
+}
+
+/* Формы */
+.form-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--vision-border);
+    color: var(--vision-text);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--vision-accent);
+    box-shadow: var(--vision-glow);
+}
+
+/* Анимации */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: var(--vision-glow); }
+    50% { box-shadow: 0 0 30px rgba(0, 125, 250, 0.5); }
+}
+
+/* Адаптивность */
 @media (max-width: 768px) {
-    .container {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
     .insight-card {
-        margin: 12px 0;
-        border-radius: 20px;
+        padding: 1rem;
     }
-
-    .category-badge, .status-badge {
-        font-size: 12px;
-        padding: 6px 12px;
+    
+    .category-badge {
+        font-size: 0.75rem;
+        padding: 0.375rem 0.75rem;
     }
-
-    .bottom-nav {
-        padding: 8px 16px;
+    
+    .header-title {
+        font-size: 1.125rem;
     }
 } 
