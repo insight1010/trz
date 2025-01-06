@@ -756,6 +756,18 @@
         new bootstrap.Modal(document.getElementById("newCaseModal")).hide();
         form.reset();
       });
+
+    // Функция для отправки сообщения в канал
+    function shareToChannel() {
+      const message = "Всем проблемам инсайт! 💡\n\nПрисоединяйтесь к решению бизнес-задач с помощью ТРИЗ.";
+      
+      if (tg.WebApp) {
+        tg.sendData(JSON.stringify({
+          action: 'share_to_channel',
+          message: message
+        }));
+      }
+    }
   </script>
 </body>
 </html>

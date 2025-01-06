@@ -1,14 +1,14 @@
 {
-  "name": "insightflow-bot",
+  "name": "insight-bot",
   "version": "1.0.0",
-  "description": "Telegram bot for InsightFlow Mini App",
-  "main": "index.js",
+  "description": "Telegram bot for InsightFlow",
+  "main": "bot.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node bot.js",
+    "dev": "nodemon bot.js"
   },
   "dependencies": {
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.0.0",
     "telegraf": "^4.15.3"
   },
   "devDependencies": {
