@@ -3,7 +3,7 @@ const { Telegraf, Markup } = require('telegraf');
 
 // Конфигурация из переменных окружения
 const BOT_TOKEN = process.env.BOT_TOKEN || 'YOUR_BOT_TOKEN';
-const WEBAPP_URL = process.env.WEBAPP_URL || 'https://insight1010.github.io/trz/';
+const WEBAPP_URL = 't.me/Insight2b_bot/insight2b';
 const CHANNEL_ID = process.env.CHANNEL_ID || '@your_channel';
 const BUTTON_TEXT = 'Открыть InsightFlow';
 
