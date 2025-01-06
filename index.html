@@ -859,39 +859,131 @@
                 padding: 8px 16px;
             }
         }
+
+        /* Дополнительные стили для улучшения внешнего вида */
+        .tg-header {
+            background: var(--tg-theme-bg-color);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--tg-theme-text-color);
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            padding: 8px;
+            color: var(--tg-theme-text-color);
+            font-size: 20px;
+        }
+
+        .filter-section {
+            position: sticky;
+            top: 50px;
+            background: var(--tg-theme-bg-color);
+            z-index: 99;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .chip {
+            background: var(--tg-theme-bg-color);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 13px;
+            color: var(--tg-theme-hint-color);
+            transition: all 0.2s ease;
+        }
+
+        .chip.active {
+            background: var(--tg-theme-button-color);
+            color: var(--tg-theme-button-text-color);
+            border-color: var(--tg-theme-button-color);
+        }
+
+        .btn-add {
+            background: var(--tg-theme-button-color);
+            color: var(--tg-theme-button-text-color);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-20px);
+        }
+
+        .splash-slogan {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .splash-slogan .primary-text {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--tg-theme-button-color);
+        }
+
+        .splash-slogan .secondary-text {
+            font-size: 16px;
+            color: var(--tg-theme-hint-color);
+        }
+
+        .main-content {
+            padding-bottom: 100px;
+        }
     </style>
 </head>
 <body>
     <!-- Сплэш-экран -->
     <div class="splash-screen" id="splashScreen">
         <div class="splash-logo"></div>
-        <div class="splash-slogan">Всем проблемам инсайт</div>
+        <div class="splash-slogan">
+            <span class="primary-text">ТРИЗ</span>
+            <span class="secondary-text">Решаем проблемы системно</span>
+        </div>
     </div>
 
     <!-- Навигация -->
-    <nav class="navbar sticky-top">
-        <div class="container">
-            <span class="navbar-brand fw-bold">InsightFlow</span>
-            <button class="btn btn-outline" onclick="showProfile()">
-                <i class="bi bi-person"></i>
+    <div class="tg-header">
+        <div class="container d-flex justify-content-between align-items-center py-2">
+            <span class="header-title">ТРИЗ</span>
+            <button class="btn-icon" onclick="showProfile()">
+                <i class="bi bi-person-circle"></i>
             </button>
         </div>
-    </nav>
+    </div>
+
+    <!-- Фильтры -->
+    <div class="filter-section">
+        <div class="container">
+            <div class="filter-chips">
+                <div class="chip active">Все кейсы</div>
+                <div class="chip">HR</div>
+                <div class="chip">Маркетинг</div>
+                <div class="chip">Менеджмент</div>
+                <div class="chip">Операционка</div>
+                <div class="chip">Стратегия</div>
+            </div>
+        </div>
+    </div>
 
     <!-- Основной контент -->
-    <div class="container mb-5">
-        <!-- Фильтры -->
-        <div class="filter-chips mb-4">
-            <div class="chip active">Все кейсы</div>
-            <div class="chip">HR</div>
-            <div class="chip">Маркетинг</div>
-            <div class="chip">Менеджмент</div>
-            <div class="chip">Операционка</div>
-            <div class="chip">Стратегия</div>
-        </div>
-
-        <!-- Лента инсайтов -->
+    <div class="container main-content">
         <div class="insight-feed">
+            <!-- Карточки инсайтов -->
             <!-- Операционные кейсы -->
             <div class="insight-card card mb-4">
                 <div class="card-body">
@@ -2167,26 +2259,28 @@
 
     <!-- Нижняя навигация -->
     <div class="bottom-nav">
-        <div class="d-flex justify-content-between align-items-center">
-            <a href="#" class="nav-link" data-nav="insights">
-                <i class="bi bi-house"></i>
-                <span>Инсайты</span>
-            </a>
-            <a href="#" class="nav-link" data-nav="search">
-                <i class="bi bi-search"></i>
-                <span>Поиск</span>
-            </a>
-            <button class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#newCaseModal">
-                <i class="bi bi-plus-lg"></i>
-            </button>
-            <a href="#" class="nav-link" data-nav="saved">
-                <i class="bi bi-bookmark"></i>
-                <span>Сохранённые</span>
-            </a>
-            <a href="#" class="nav-link" data-nav="profile" onclick="showProfile()">
-                <i class="bi bi-person"></i>
-                <span>Профиль</span>
-            </a>
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="#" class="nav-link active" data-nav="insights">
+                    <i class="bi bi-lightbulb-fill"></i>
+                    <span>Инсайты</span>
+                </a>
+                <a href="#" class="nav-link" data-nav="search">
+                    <i class="bi bi-search"></i>
+                    <span>Поиск</span>
+                </a>
+                <button class="btn-add" data-bs-toggle="modal" data-bs-target="#newCaseModal">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+                <a href="#" class="nav-link" data-nav="saved">
+                    <i class="bi bi-bookmark"></i>
+                    <span>Сохранённые</span>
+                </a>
+                <a href="#" class="nav-link" data-nav="profile">
+                    <i class="bi bi-person"></i>
+                    <span>Профиль</span>
+                </a>
+            </div>
         </div>
     </div>
 
