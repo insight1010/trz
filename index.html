@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ТРИЗ Платформа - Бизнес Возможности</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        :root {
+            --tg-theme-bg-color: var(--light-bg);
+            --tg-theme-button-color: var(--secondary-color);
+            --tg-theme-button-text-color: #ffffff;
+            --primary-color: #2D3047;
+            --secondary-color: #419D78;
+            --accent-color: #E0A458;
+            --light-bg: #F7F7F7;
+        }
+        
+        body {
+            background-color: var(--tg-theme-bg-color);
+            color: var(--primary-color);
+            font-family: -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
+            padding-bottom: 60px;
+        }
+
+        .navbar {
+            background-color: var(--tg-theme-bg-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand, .nav-link {
+            color: var(--primary-color) !important;
+        }
+
+        .problem-card {
+            border-radius: 12px;
+            transition: transform 0.2s;
+            background: white;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 16px;
+        }
+
+        .problem-card:active {
+            transform: scale(0.98);
+        }
+
+        .btn {
+            border-radius: 8px;
+            padding: 8px 16px;
+        }
+
+        .btn-primary {
+            background-color: var(--tg-theme-button-color);
+            border: none;
+            color: var(--tg-theme-button-text-color);
+        }
+
+        .btn-outline-primary {
+            color: var(--tg-theme-button-color);
+            border-color: var(--tg-theme-button-color);
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .badge-brainstorm {
+            background-color: #FF9F1C;
+            color: white;
+        }
+
+        .badge-ikr {
+            background-color: #2EC4B6;
+            color: white;
+        }
+
+        .progress-indicator {
+            height: 6px;
+            border-radius: 3px;
+            background-color: #E9ECEF;
+        }
+
+        .modal {
+            margin-top: 20px;
+        }
+
+        .modal-content {
+            border-radius: 16px;
+        }
+
+        .filter-scroll {
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            padding: 8px 0;
+        }
+
+        .filter-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .badge-level-1 {
+            background-color: #FF9F1C;
+            color: white;
+        }
+
+        .badge-level-2 {
+            background-color: #2EC4B6;
+            color: white;
+        }
+
+        .user-level {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 12px;
+            background: rgba(0,0,0,0.05);
+            border-radius: 20px;
+        }
+
+        .level-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--secondary-color);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .category-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            background: rgba(0,0,0,0.05);
+        }
+
+        .category-social { background: #FFE0E0; }
+        .category-economic { background: #E0FFE0; }
+        .category-local { background: #E0E0FF; }
+        .category-personal { background: #FFE0FF; }
+
+        .moderator-controls {
+            background: rgba(0,0,0,0.02);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-light mb-3">
+        <div class="container">
+            <span class="navbar-brand">ТРИЗ Платформа</span>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <div class="container">
+        <!-- Фильтры -->
+        <div class="filter-scroll mb-3">
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-primary active">Все задачи</button>
+                <button class="btn btn-outline-primary">Конфликты</button>
+                <button class="btn btn-outline-primary">Идеал</button>
+                <button class="btn btn-outline-primary">Решённые</button>
+            </div>
+        </div>
+
+        <!-- Лента проблем -->
+        <div class="row g-3">
+            <!-- Пример карточки уровня 1 -->
+            <div class="col-12">
+                <div class="card problem-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <h5 class="card-title">Недостаточная мотивация сотрудников</h5>
+                                <div class="mb-2">
+                                    <span class="category-tag category-local">Локальная проблема</span>
+                                </div>
+                            </div>
+                            <span class="badge badge-level-1">Уровень 1</span>
+                        </div>
+                        <p class="card-text">Сотрудники не проявляют инициативу и работают без энтузиазма</p>
+                        <div class="mb-3">
+                            <small class="text-muted">Собранные факты:</small>
+                            <ul class="small text-muted mb-0">
+                                <li>50% сотрудников опаздывают</li>
+                                <li>Низкая активность на собраниях</li>
+                                <li>Отсутствие новых идей</li>
+                            </ul>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <small class="text-muted">Участников: 5</small>
+                                <small class="text-muted ms-2">Предложений: 3</small>
+                            </div>
+                            <button class="btn btn-primary btn-sm">Предложить конфликт</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Пример карточки уровня 2 -->
+            <div class="col-12">
+                <div class="card problem-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <h5 class="card-title">Автоматизация vs Персонализация</h5>
+                                <div class="mb-2">
+                                    <span class="category-tag category-economic">Экономическая проблема</span>
+                                </div>
+                            </div>
+                            <span class="badge badge-level-2">Уровень 2</span>
+                        </div>
+                        <p class="card-text">Конфликт между автоматизацией процессов и сохранением персонального подхода</p>
+                        <div class="progress progress-indicator mb-3">
+                            <div class="progress-bar bg-success" style="width: 60%"></div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <small class="text-muted">Участников: 12</small>
+                                <small class="text-muted ms-2">Решений: 8</small>
+                            </div>
+                            <button class="btn btn-primary btn-sm">Предложить ИКР</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Нижняя навигация -->
+    <div class="bottom-nav">
+        <div class="d-flex justify-content-around">
+            <button class="btn btn-link text-decoration-none" onclick="showFeed()">
+                <i class="bi bi-house-fill"></i>
+                <div>Лента</div>
+            </button>
+            <button class="btn btn-link text-decoration-none" onclick="showMyTasks()">
+                <i class="bi bi-list-task"></i>
+                <div>Мои задачи</div>
+            </button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newProblemModal">
+                + Новая задача
+            </button>
+        </div>
+    </div>
+
+    <!-- Модальное окно добавления проблемы -->
+    <div class="modal fade" id="newProblemModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Новая задача</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Уровень задачи</label>
+                            <select class="form-select" id="problemLevel">
+                                <option value="1">Уровень 1: Регистрация раздражителя</option>
+                                <option value="2">Уровень 2: Конфликтующая пара</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3" id="categorySelect">
+                            <label class="form-label">Категория раздражителя</label>
+                            <select class="form-select">
+                                <option value="social">Социальное недовольство</option>
+                                <option value="economic">Экономическая ситуация</option>
+                                <option value="local">Локальные проблемы</option>
+                                <option value="personal">Персональные проблемы</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Название</label>
+                            <input type="text" class="form-control" placeholder="Кратко опишите ситуацию">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Описание ситуации</label>
+                            <textarea class="form-control" rows="3" placeholder="Опишите контекст и детали"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Факты</label>
+                            <textarea class="form-control" rows="3" placeholder="Перечислите конкретные факты, наблюдения, данные"></textarea>
+                        </div>
+
+                        <div class="mb-3 d-none" id="conflictPairForm">
+                            <h6 class="mb-3">Конфликтующая пара</h6>
+                            <div class="mb-3">
+                                <label class="form-label">Элемент 1</label>
+                                <input type="text" class="form-control" placeholder="Первый элемент конфликта">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Элемент 2</label>
+                                <input type="text" class="form-control" placeholder="Второй элемент конфликта">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Идеальный конечный результат (ИКР)</label>
+                                <textarea class="form-control" rows="2" placeholder="Опишите желаемый результат"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary">Опубликовать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Профиль пользователя -->
+    <div class="modal fade" id="userProfileModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Профиль</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <div class="level-icon mb-2">15</div>
+                        <h5>Решатель проблем</h5>
+                        <div class="progress mb-2" style="height: 8px;">
+                            <div class="progress-bar bg-success" style="width: 75%"></div>
+                        </div>
+                        <small class="text-muted">750/1000 XP до следующего уровня</small>
+                    </div>
+
+                    <div class="row text-center mb-4">
+                        <div class="col">
+                            <h6>23</h6>
+                            <small class="text-muted">Решено проблем</small>
+                        </div>
+                        <div class="col">
+                            <h6>45</h6>
+                            <small class="text-muted">Предложено идей</small>
+                        </div>
+                        <div class="col">
+                            <h6>12</h6>
+                            <small class="text-muted">Активных задач</small>
+                        </div>
+                    </div>
+
+                    <h6 class="mb-3">Достижения</h6>
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        <span class="badge bg-success">Мастер конфликтов</span>
+                        <span class="badge bg-info">Генератор идей</span>
+                        <span class="badge bg-warning">Командный игрок</span>
+                    </div>
+
+                    <h6 class="mb-3">Статистика</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <small>
+                                <span class="text-muted">Уровень 1 проблем решено:</span>
+                                15
+                            </small>
+                        </li>
+                        <li class="mb-2">
+                            <small>
+                                <span class="text-muted">Уровень 2 проблем решено:</span>
+                                8
+                            </small>
+                        </li>
+                        <li class="mb-2">
+                            <small>
+                                <span class="text-muted">Принято предложений:</span>
+                                34
+                            </small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Инициализация Telegram Mini App
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+
+        // Модальные окна
+        const conflictDetailsModal = new bootstrap.Modal(document.getElementById('conflictDetailsModal'));
+        const idealDetailsModal = new bootstrap.Modal(document.getElementById('idealDetailsModal'));
+
+        // Функции для навигации
+        function showBrainstormDetails() {
+            conflictDetailsModal.show();
+        }
+
+        function showIKRDetails() {
+            idealDetailsModal.show();
+        }
+
+        // Обработчики фильтров
+        document.querySelectorAll('.filter-scroll .btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Убираем активный класс у всех кнопок
+                document.querySelectorAll('.filter-scroll .btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                // Добавляем активный класс нажатой кнопке
+                this.classList.add('active');
+                // Здесь будет логика фильтрации задач
+                filterTasks(this.textContent.trim());
+            });
+        });
+
+        function filterTasks(filter) {
+            // В реальном приложении здесь будет логика фильтрации
+            console.log('Применён фильтр:', filter);
+        }
+
+        function showFeed() {
+            // Показываем все задачи
+            document.querySelector('.filter-scroll .btn:first-child').click();
+        }
+
+        function showMyTasks() {
+            // Логика для показа личных задач
+            tg.showAlert('Переход к вашим задачам');
+        }
+
+        // Обработка публикации новой задачи
+        document.querySelector('#newProblemModal .btn-primary').addEventListener('click', function() {
+            // В реальном приложении здесь будет отправка данных на сервер
+            tg.showAlert('Задача опубликована!');
+            bootstrap.Modal.getInstance(document.getElementById('newProblemModal')).hide();
+        });
+
+        // Переключение формы в зависимости от уровня
+        document.getElementById('problemLevel').addEventListener('change', function() {
+            const conflictPairForm = document.getElementById('conflictPairForm');
+            const categorySelect = document.getElementById('categorySelect');
+            
+            if (this.value === '2') {
+                conflictPairForm.classList.remove('d-none');
+                categorySelect.classList.add('d-none');
+            } else {
+                conflictPairForm.classList.add('d-none');
+                categorySelect.classList.remove('d-none');
+            }
+        });
+
+        // Показ профиля
+        function showProfile() {
+            const profileModal = new bootstrap.Modal(document.getElementById('userProfileModal'));
+            profileModal.show();
+        }
+
+        // Модерация предложений
+        function moderateProposal(id, action) {
+            // В реальном приложении здесь будет логика модерации
+            tg.showAlert(`Предложение ${action === 'accept' ? 'принято' : 'отклонено'}`);
+        }
+    </script>
+</body>
+</html> 
