@@ -1,0 +1,104 @@
+:root {
+    --tg-theme-bg-color: #FFFFFF;
+    --tg-theme-button-color: #2563EB;
+    --tg-theme-button-text-color: #ffffff;
+    --primary-color: #1E293B;
+    --secondary-color: #3B82F6;
+    --accent-color: #60A5FA;
+    --success-color: #10B981;
+    --warning-color: #F59E0B;
+    --surface-color: #F8FAFC;
+    --neo-shadow: 
+        8px 8px 16px rgba(0, 0, 0, 0.03),
+        -8px -8px 16px rgba(255, 255, 255, 0.8);
+    --neo-shadow-inset: 
+        inset 2px 2px 5px rgba(0, 0, 0, 0.05),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.8);
+}
+
+body {
+    background-color: var(--tg-theme-bg-color);
+    color: var(--primary-color);
+    font-family: -apple-system, system-ui, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+    padding-bottom: 80px;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.insight-card {
+    border: none;
+    border-radius: 24px;
+    background: var(--surface-color);
+    box-shadow: var(--neo-shadow);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.insight-card:active {
+    transform: scale(0.98);
+    box-shadow: var(--neo-shadow-inset);
+}
+
+.category-badge {
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 16px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: var(--neo-shadow);
+}
+
+.category-badge::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: pulse 2s infinite;
+}
+
+.category-hr { background: #EEF2FF; color: #4F46E5; }
+.category-marketing { background: #FDF2F8; color: #DB2777; }
+.category-management { background: #ECFDF5; color: #059669; }
+.category-operations { background: #FEF3C7; color: #D97706; }
+.category-strategy { background: #EFF6FF; color: #2563EB; }
+
+/* Остальные стили из index.html */
+/* ... */
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .insight-card {
+        margin: 12px 0;
+        border-radius: 20px;
+    }
+
+    .category-badge, .status-badge {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .bottom-nav {
+        padding: 8px 16px;
+    }
+} 
